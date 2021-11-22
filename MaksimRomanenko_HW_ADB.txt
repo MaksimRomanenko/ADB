@@ -1,0 +1,37 @@
+ADB HW_1
+
+Сценарий напишите в .txt файл.
+.txt сценарий и .log файл прииложения todolist выгружайте на GitHub.
+
+ 1. Отобразить подключённый девайс в консоли.
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$ adb devices
+
+List of devices attached
+RQ3005EMMW	device
+
+ 2. Установить .apk файл приложениия todolist на телефон с компьютера через  ADB
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$ adb install Todolists.apk
+
+Performing Streamed Install
+Success
+
+ 3. Вывести адрес приложения todolist в системе Android
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$ adb shell 'pm list packages -f' | grep todolist
+
+package:/data/app/com.android.todolist-TEWRG6G6b3mDOZxI5Qzr7A==/base.apk=com.android.todolist
+
+ 4. Сделать скриншот запущенного приложения todolist и сразу скопировать на компьютер в одной команде.
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$ adb shell screencap /storage/emulated/0/DCIM/screen_shot.png  && adb pull /storage/emulated/0/DCIM/screen_shot.png /Users/maximromanenko/Downloads/001_ToDoList-master/app/build/outputs/apk/debug/screen_shot.png
+
+/storage/emulated/0/DCIM/screen_shot.png: 1 file pulled, 0 skipped. 10.0 MB/s (32836 bytes in 0.003s)
+
+ 5. Вывести в консоль логи приложения todolist
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$  adb logcat | grep -rnw "todolist"
+
+ 6. Скопировать логи приложения todolist на компьютер
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$  adb logcat | grep -rnw "todolist" > log_todolist.log
+
+ 7. Удалить приложение todolist с телефона через ADB
+MacBook-Pro-Maxim-Romanenko:debug maximromanenko$ adb uninstall com.android.todolist
+
+Success
